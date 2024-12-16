@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 enum Opcode
 {
     End = 0,

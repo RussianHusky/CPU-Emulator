@@ -35,7 +35,19 @@ public class Memory
     public int Pop()
     {
         if (_sp >= _memory.Length - 1)
-            throw new InvalidOperationException("Stack underflow.");
+        {
+            if (_memory[_sp] != -1)
+            {
+                var temp = _memory[_sp];
+                _memory[_sp] = -1;
+                return temp;
+            }
+            else
+            {
+                throw new StackOverflowException("Stack underflow.");
+            }
+        }
+
         _memory[_sp] = 0;
         return _memory[++_sp];
     }

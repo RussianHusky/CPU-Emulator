@@ -4,8 +4,18 @@ class Program
 {
     static void Main(string[] args)
     {
-        CPU cpu = new CPU(256);
-
+        CPU cpu = new CPU(512);
+        
+        /*string[] program = new string[]
+        {
+            "Push 10",
+            "Push 20",
+            "Add",
+            "Push 30",
+            "Store",
+            "End"
+        };*/
+        
         /*string[] program = new string[]
         {
             "Push 0",   // [max]
@@ -43,8 +53,8 @@ class Program
 
         string[] program = new string[] // Finds max in data memory only, ignores the accumulator stack. First 2 commands are for testing
         {
-            "Push 200",
-            "Push 500",
+            "Push 700",
+            "Push 503",
             "Push 0",   // [max]
             "Push Data",    // [ind, max]
             "Push Data",    // [ind, ind, max]
@@ -75,7 +85,7 @@ class Program
             "EndComp:", // [ind, ind, max]
             "Pop",
             "Pop",
-            /*"Pop",    // Different debug
+            "Pop",    // Different debug
             "Push 150",
             "Store",
             "Push 0",   // [max]
@@ -107,7 +117,7 @@ class Program
             "Jump Checked1",
             "EndComp1:", // [ind, ind, max]
             "Pop",  // [ind, max]
-            "Pop",*/  // [max]
+            "Pop",  // [max]
             "End"
         };
 

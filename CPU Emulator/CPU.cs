@@ -87,13 +87,7 @@ public class CPU
     {
         while (true)
         {
-            if (Memory.Read(Registers.PC) >= 4096)
-            {
-                var opcode = (Opcode)((Memory.Read(Registers.PC) >> 12) & (0xF));
-                Console.WriteLine(opcode.ToString() + " " + Memory.Read(Registers.PC + 1));
-            }
             _commandHandler.Execute(Registers.PC++);
-            Console.WriteLine("[ " + Memory.Read(Memory.StackPointer) + " " + Memory.Read(Memory.StackPointer) + " " + Memory.Read(Memory.StackPointer) + " ]");
         }
     }
 }
