@@ -43,10 +43,10 @@ public class CPU
         {
             string[] input = command.Split();
 
-            if (input.Length == 1 && input[0].EndsWith(":")) // Label
+            if (input.Length == 1 && input[0].EndsWith(":"))
             {
                 string label = input[0].TrimEnd(':');
-                labelAddresses[label] = i; // Map label to current address
+                labelAddresses[label] = i; 
                 continue;
             }
 
@@ -93,7 +93,7 @@ public class CPU
                 Console.WriteLine(opcode.ToString() + " " + Memory.Read(Registers.PC + 1));
             }
             _commandHandler.Execute(Registers.PC++);
-            Console.WriteLine("[ " + Memory.Read(61) + " " + Memory.Read(62) + " " + Memory.Read(63) + " ]");
+            Console.WriteLine("[ " + Memory.Read(Memory.StackPointer) + " " + Memory.Read(Memory.StackPointer) + " " + Memory.Read(Memory.StackPointer) + " ]");
         }
     }
 }

@@ -107,7 +107,7 @@ public class CommandHandler
                 break;
             
             case Opcode.SP:
-                _memory.Push(_memory.StackPointer);
+                _memory.Push(_memory.StackPointer - 1);
                 break;
             
             default:
