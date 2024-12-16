@@ -1,18 +1,12 @@
 public class Memory
 {
-    private int[] _memory; // Memory array
-    private int _sp;       // Stack pointer
-    private int _capacity;
+    private int[] _memory;
+    private int _sp;
 
     public Memory(int size)
     {
         _memory = new int[size];
         _sp = size - 1;
-    }
-
-    public void WriteCap(int capacity)
-    {
-        _capacity = capacity;
     }
     
     // Read and write methods
