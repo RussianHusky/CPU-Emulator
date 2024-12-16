@@ -51,10 +51,10 @@ class Program
             "End",
         };*/
 
-        string[] program = new string[] // Finds max in data memory only, ignores the accumulator stack. First 2 commands are for testing
+        /*string[] program = new string[] // Finds max in data memory only, ignores the accumulator stack. First 2 commands are for testing
         {
             "Push 700",
-            "Push 503",
+            "Push 509",
             "Push 0",   // [max]
             "Push Data",    // [ind, max]
             "Push Data",    // [ind, ind, max]
@@ -85,8 +85,7 @@ class Program
             "EndComp:", // [ind, ind, max]
             "Pop",
             "Pop",
-            "Pop",    // Different debug
-            "Push 150",
+            /*"Pop",
             "Store",
             "Push 0",   // [max]
             "Push Data",    // [ind, max]
@@ -117,13 +116,54 @@ class Program
             "Jump Checked1",
             "EndComp1:", // [ind, ind, max]
             "Pop",  // [ind, max]
-            "Pop",  // [max]
-            "End"
-        };
+            "Pop",  // [max]*/
+        //    "End"
+        //};
 
+        string[] program = new string[]
+        {
+            "Push 0", // [max]
+            "Push Data", // [ind, max]
+            "Push Data", // [ind, ind, max]
+            "Max:", // Compare
+            "Load", // [int, ind, max]
+            "Rol", // [ind, max, int]
+            "Rol", // [max, int, ind]
+            "Comp", // [max > int]
+            "JumpZ NewMax", // if false jump NewMax
+            "Swap", // if true [int, max, ind]
+            "Pop", // [int -> max, ind]
+            "Checked:",
+            "Swap", // [ind, max]
+            "Push 1", // [1, ind, max]
+            "Add", // [ind += 1, max]
+            "Push Data", // [SP, ind, max]
+            "Push Data",
+            "Load",
+            "Add",
+            "Push 1",
+            "Add",
+            "Comp", // SP > ind
+            "JumpNZ Iterate", // if true jump Iterate
+            "Jump EndComp",
+            "Iterate:",
+            "Pop", // [ind, max]
+            "Dup", // [ind, ind, max]
+            "Load", // [int, ind, max]
+            "Jump Max", // jump to beginning
+            "NewMax:",
+            "Pop", // [max, ind]
+            "Jump Checked",
+            "EndComp:", // [ind, ind, max]
+            "Pop",
+            "Pop",
+            "End",
+        };
+        
         int[] data = new int[]
         {
-            100,
+            5,
+            102,
             101,
             103,
             100,

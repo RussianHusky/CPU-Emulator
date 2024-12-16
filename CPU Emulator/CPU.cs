@@ -3,13 +3,13 @@ public class CPU
     public Register Registers { get; private set; }
     public Memory Memory { get; private set; }
     private CommandHandler _commandHandler;
-    Dictionary<string, int> labelAddresses = new();
+    public Dictionary<string, int> labelAddresses = new();
     
     public CPU(int memorySize)
     {
         Registers = new Register();
         Memory = new Memory(memorySize);
-        _commandHandler = new CommandHandler(Registers, Memory);
+        _commandHandler = new CommandHandler(this, Registers, Memory);
     }
 
     public void LoadProgram(string[] program, int[] data)

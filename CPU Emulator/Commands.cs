@@ -22,15 +22,18 @@ public class CommandHandler
 {
     private Register _register;
     private Memory _memory;
+    private CPU _cpu;
 
-    public CommandHandler(Register register, Memory memory)
+    public CommandHandler(CPU cpu, Register register, Memory memory)
     {
+        _cpu = cpu;
         _register = register;
         _memory = memory;
     }
 
     public void Execute(int commandAddress)
     {
+        
         int command = _memory.Read(commandAddress);
         var opcode = (Opcode)((command >> 12) & (0xF));
         
@@ -45,7 +48,11 @@ public class CommandHandler
                 int operand = _memory.Read(_register.PC++);
                 _memory.Push(operand);
                 break;
-
+            
+            case Opcode.Sub:
+                _memory.Push(_memory.Pop() - _memory.Pop());
+                break;
+            
             case Opcode.Add:
                 _memory.Push(_memory.Pop() + _memory.Pop());
                 _register.ZF = (_memory.Read(_memory.StackPointer) == 0);
@@ -56,7 +63,8 @@ public class CommandHandler
                 break;
             
             case Opcode.Store:
-                _memory.Write(_memory.Pop(), _memory.Pop());
+                _memory.Write(_memory.Read(_cpu.labelAddresses["Data"] - 1) + (_cpu.labelAddresses["Data"]), _memory.Pop());
+                _memory.Write(_cpu.labelAddresses["Data"] - 1, _memory.Read(_cpu.labelAddresses["Data"] - 1) + 1);
                 break;
             
             case Opcode.Load:
